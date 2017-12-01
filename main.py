@@ -14,9 +14,4 @@ if (len(argv) < 2):
 if (len(argv) > 2):
     raise Exception(WRONG_ARGS)
 data = fn.sort_by_node_time(fn.read_file(argv[1]))
-for n in data:
-    print n
-print '-------------'
-res = fn.parse(data)
-for r in res:
-    print r
+print fn.show(fn.parse(data))

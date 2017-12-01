@@ -19,10 +19,13 @@ def sort_by_nonitor_time(data):
     return sorted(data, cmp=lambda x,y: cmp(y[2],x[2]))
 
 def show(data):
-    st = '\n'
-    for d in data:
-        st = st + str(d) + "\n"
+    st = ''
+    for row in data:
+        for elem in row:
+            st = st + str(elem) + " "
+        st = st + "\n"
     return st
+
 def parse(data):
     nodes = {}
     res = []

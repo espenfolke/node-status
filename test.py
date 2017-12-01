@@ -1,5 +1,8 @@
 from functions import parse, show
 
+def assert_msg(i,res,test_out):
+    return "\nTEST: "+str(i+1)+"\nOutput\t\t==> "+show(res)+"\nExpected\t==> "+show(test_out)
+
 test_in = [
     [
         [1508405807242, 1508405807141, 'vader', 'HELLO']
@@ -11,7 +14,7 @@ test_in = [
         [1508405807512, 1508405807400, 'vader', 'LOST', 'luke'],
         [1508405807467, 1508405807479, 'luke', 'FOUND', 'r2d2'],
         [1508405807468, 1508405807480, 'luke', 'LOST', 'leia'],
-        [1508405807560, 1508405807504, 'vader', 'HELLO']
+        [1508405807560, 1508405807504, 'vader', 'HELLO'],
     ]
 ]
 
@@ -28,7 +31,8 @@ test_out = [
 ]
 
 i=0
+test = []
 for test in test_in:
     res = parse(test)
-    assert (res == test_out[i]), "\nTEST: "+str(i+1)+"\nOutput\t\t==> "+show(res)+"\nExpected\t==> "+show(test_out[i])
+    assert (res == test_out[i]), assert_msg(i, res, test_out[i])
     i=i+1
