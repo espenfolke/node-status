@@ -21,3 +21,11 @@ python main.py input.txt
 ```
 
 #### Assumptions
+- if a node finds or loses another node then the former is assumed to be ALIVE
+- if a node is found without first saying HELLO it is assumed to be ALIVE
+- if a node is lost without first saying HELLO it is assumed to be DEAD
+- Nodes are synced to within less than 50 milliseconds of each other
+- Monitor time is not synced to Node time
+
+## TODO
+- if more than one notifications concerning a node are received and have a timestamp of 50 milliseconds apart the status should be turned to UNKNOWN

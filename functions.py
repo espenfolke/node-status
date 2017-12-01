@@ -19,7 +19,7 @@ def sort_by_nonitor_time(data):
     return sorted(data, cmp=lambda x,y: cmp(y[2],x[2]))
 
 def show(data):
-    st = ''
+    st = '\n'
     for row in data:
         for elem in row:
             st = st + str(elem) + " "
