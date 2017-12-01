@@ -20,16 +20,4 @@ This is a console application that takes in an input file with status notificati
 python main.py input.txt
 ```
 
-### Assumptions
-
-
-
-
-
-
-
-
-
-
-
-Antonis Pishias
+#### Assumptions
