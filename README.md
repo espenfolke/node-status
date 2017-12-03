@@ -28,6 +28,3 @@ python main.py input.txt
 - Monitor time is not synced to Node time
 - If more than one notifications, which have a less than 50 millisecond difference (node time), are received by the monitor, it means the status of the node is UNKNOWN
 - If the node is in an UNKNOWN state and then a notification is received by the monitor with a timestamp (node time) that marks 50 milliseconds later than the first notification that caused the UNKNOWN state the state is set to what this new notification shows the node to be
-
-## TODO
-- if more than one notifications concerning a node are received and have a timestamp of 50 milliseconds apart the status should be turned to UNKNOWN
