@@ -38,6 +38,13 @@ class Notification():
             return [self.node_name]
         else:
             return [self.node_name, self.other_node_name]
+    def get_status(self, node_name):
+        if (self.node_name == self.node_name):
+            return "ALIVE"
+        elif (self.msg == "LOST"):
+                return "DEAD"
+        elif (self.msg == "FOUND"):
+            return "ALIVE"
 
 class Node():
     def __init__(self, node_name, notification):
@@ -50,21 +57,20 @@ class Node():
         return st
     def get_status(self):
         if (len(self.notifications) > 1):
-            self.status = "UNKNOWN"
-            for notifications in self.notifications:
-                print(self.show_status(notifications))
+            # Check notifications to see if they agree on the state
+            self.status = self.get_latest_notification().get_status(self.name)
+            for notification in self.notifications:
+                current = notification.get_status(self.name)
+                if (self.status is not current):
+                    self.status = 'UNKNOWN'
+                    break;
+            print(self.show_status(notification))
         else:
             latest = self.get_latest_notification()
-            if (latest.node_name == self.name):
-                self.status = "ALIVE"
-            else:
-                if (latest.msg == "LOST"):
-                    self.status = "DEAD"
-                elif (latest.msg == "FOUND"):
-                    self.status = "ALIVE"
+            self.status = latest.get_status(self.name)
             print(self.show_status(latest))
     def show_status(self, notification):
-        return "{} {} {} {} {}".format(self.name, self.status, notification.node_time, notification.monitor_time, notification.get_reason())
+        return "{} {} {} {}".format(self.name, self.status, notification.monitor_time, notification.get_reason())
     def get_latest_notification(self):
         return self.notifications[0]
     def is_later(self, notification):
