@@ -26,6 +26,7 @@ python main.py input.txt
 - if a node is lost without first saying HELLO it is assumed to be DEAD
 - Nodes are synced to within less than 50 milliseconds of each other
 - Monitor time is not synced to Node time
+- If more than one notifications, which have a less than 50 millisecond difference (node time), are received by the monitor, it means the status of the node is UNKNOWN
 
 ## TODO
 - if more than one notifications concerning a node are received and have a timestamp of 50 milliseconds apart the status should be turned to UNKNOWN

@@ -13,8 +13,8 @@ if (len(argv) < 2):
     raise Exception(NO_INPUT_FILE)
 if (len(argv) > 2):
     raise Exception(WRONG_ARGS)
-data = fn.read_file(argv[1])
+nodes = fn.read_file(argv[1])
 # fn.debug_show_nodes(data)
 
-for key in data:
-    data[key].get_status()
+for node_name in nodes:
+    print(nodes[node_name].get_status())

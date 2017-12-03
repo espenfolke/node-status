@@ -39,12 +39,13 @@ class Notification():
         else:
             return [self.node_name, self.other_node_name]
     def get_status(self, node_name):
-        if (self.node_name == self.node_name):
+        if (self.node_name == node_name):
             return "ALIVE"
-        elif (self.msg == "LOST"):
+        else:
+            if (self.msg == "LOST"):
                 return "DEAD"
-        elif (self.msg == "FOUND"):
-            return "ALIVE"
+            elif (self.msg == "FOUND"):
+                return "ALIVE"
 
 class Node():
     def __init__(self, node_name, notification):
@@ -64,11 +65,19 @@ class Node():
                 if (self.status is not current):
                     self.status = 'UNKNOWN'
                     break;
-            print(self.show_status(notification))
+            if (self.status == 'UNKNOWN'):
+                st = ''
+                for notification in self.notifications:
+                    st = st + self.show_status(notification) + "\n"
+                return st
+            else:
+                latest = self.get_latest_notification()
+                self.status = latest.get_status(self.name)
+                return self.show_status(latest)
         else:
             latest = self.get_latest_notification()
             self.status = latest.get_status(self.name)
-            print(self.show_status(latest))
+            return self.show_status(latest)
     def show_status(self, notification):
         return "{} {} {} {}".format(self.name, self.status, notification.monitor_time, notification.get_reason())
     def get_latest_notification(self):
