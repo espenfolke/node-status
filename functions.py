@@ -82,19 +82,27 @@ class Node():
         return "{} {} {} {}".format(self.name, self.status, notification.monitor_time, notification.get_reason())
     def get_latest_notification(self):
         return self.notifications[0]
-    def is_later(self, notification):
+    def is_latest(self, notification):
         return notification.node_time - self.get_latest_notification().node_time
+    def difference_from_first(self, notification):
+        return notification.node_time - self.notifications[-1].node_time
     def replace_notification(self, notification):
         self.notifications = [notification]
     def add_notification(self, notification):
-        time_difference = self.is_later(notification)
+        time_difference = self.is_latest(notification)
         if (time_difference > 0):
-            if (time_difference > 50):
-                self.replace_notification(notification)
+            self.get_status()
+            if (self.status == 'UNKNOWN'):
+                time_difference = self.difference_from_first(notification)
+                if (time_difference > 50):
+                    self.replace_notification(notification)
             else:
-                self.notifications.append(notification)
-                self.notifications = sort_by_node_time(self.notifications)
-        # print(self.name, self.notifications)
+                if (time_difference > 50):
+                    self.replace_notification(notification)
+                else:
+                    self.notifications.append(notification)
+                    self.notifications = sort_by_node_time(self.notifications)
+        #print(self.name, self.notifications)
 
 def read_file(inputfile):
     nodes = {}
